@@ -54,14 +54,6 @@ Vagrant.configure(2) do |config|
   # disable folder '/vagrant' (guest machine)
   config.vm.synced_folder '.', '/vagrant', disabled: true
 
-  # hosts settings (host machine)
-  config.vm.provision :hostmanager
-  config.hostmanager.enabled            = true
-  config.hostmanager.manage_host        = true
-  config.hostmanager.ignore_private_ip  = false
-  config.hostmanager.include_offline    = true
-  config.hostmanager.aliases            = domains.values
-
   # provisioners
   config.vm.provision 'shell', path: './vagrant/provision/once-as-root.sh', args: [options['timezone']]
   config.vm.provision 'shell', path: './vagrant/provision/once-as-vagrant.sh', args: [options['github_token']], privileged: false
